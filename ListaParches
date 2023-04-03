@@ -1,0 +1,12 @@
++status2d
++hide_vacant_tags
+%fakefullscreen
++pertag
++fullgaps-toggle
++attachaside
+-preserveonrestart
+%alwayscenter
++movestack
++bottomstack
+-cyclelayouts
+-doublepressquit
