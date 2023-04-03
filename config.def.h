@@ -68,7 +68,8 @@ static const char *sublime_text[]  = { "/opt/sublime_text/sublime_text", NULL };
 static const char *rofi[] = { "/home/javier/suckless/dwm/rofi/bin/launcher", NULL };
 static const char *picom_toggle[] = { "/home/javier/suckless/dwm/scripts/picom-toggle.sh", NULL };
 static const char *flameshotgui[] = { "flameshot","gui", NULL };
-static const char *flameshotcap[] = { "flameshot","full","-p","~/Imágenes/captura", NULL };
+static const char *flameshotcap[] = { "flameshot","full","-p","/home/javier/Imágenes/captura", NULL };
+static const char *archlogout[] = { "archlinux-logout", NULL };
 
 #include "movestack.c"
 static const Key keys[] = {
@@ -82,6 +83,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = picom_toggle} },
 	{ MODKEY,                       XK_Print,  spawn,          {.v = flameshotgui} },
 	{ 0,                            XK_Print,  spawn,          {.v = flameshotcap} },
+	{ MODKEY,                       XK_x,      spawn,          {.v = archlogout} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
