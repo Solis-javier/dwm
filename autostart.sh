@@ -46,3 +46,6 @@ picom -b  --config ~/suckless/dwm/picom/picom.conf &
 #run "ckb-next -b"
 #run "discord"
 #run "telegram-desktop"
+pkill bar.sh
+#~/suckless/dwm/scripts/dwmbar.sh &
+while type dwm >/dev/null; do dwm && continue || break; done
