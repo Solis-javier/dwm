@@ -16,19 +16,29 @@ function run {
 #run xrandr --output DVI-D-1 --right-of DVI-I-1 --auto
 #run xrandr --output HDMI2 --right-of HDMI1 --auto
 #autorandr horizontal
-exec slstatus &
-xwallpaper --zoom ~/Imágenes/wallpapers/backgrounds/gruvbox/gruvbox-lake-cliffs.jpg &
-#run "nm-applet"
-#run "pamac-tray"
-#run "variety"
+#//-/__-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__-/
+#Bar  and menu
+exec slstatus 2>&1 >/dev/null &
+#~/suckless/dwm/scripts/dwmbar.sh &
+#~/suckless/dwm/dwm-bar/dwm_bar.sh & 
+#do
+#  xsetroot -name "$barra"
+#  sleep 1s
+#done
+#//-/__-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__/-/__-/
+
+#xwallpaper --zoom ~/Imágenes/wallpapers/backgrounds/gruvbox/gruvbox-rails.jpg &
+run "nm-applet"
+run "volumeicon"
+run "pamac-tray"
+run "variety"
 run "xfce4-power-manager"
+#run "numlockx on"
 #run "blueberry-tray"
 run "/usr/lib/xfce4/notifyd/xfce4-notifyd"
 run "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 picom -b  --config ~/suckless/dwm/picom/picom.conf &
-#~/suckless/dwm/scripts/dwmbar.sh &
-#run "numlockx on"
-#run "volumeicon"
+#volumeicon &
 #exec slstatus &
 #sxhkd -c ~/.config/arco-dwm/sxhkd/sxhkdrc &
 #run "nitrogen --restore"
@@ -46,6 +56,9 @@ picom -b  --config ~/suckless/dwm/picom/picom.conf &
 #run "ckb-next -b"
 #run "discord"
 #run "telegram-desktop"
-pkill bar.sh
 #~/suckless/dwm/scripts/dwmbar.sh &
+while true; do
+  sh ~/suckless/slstatus/weather.sh 
+  sleep 1800s
+done &
 while type dwm >/dev/null; do dwm && continue || break; done

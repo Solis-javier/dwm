@@ -63,12 +63,18 @@ static const char unknown_str[] = "n/a";
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  */
+/*codigo de colores Fondo ^b#0b5345^, texto ^c#b3b6b7^ */
 static const struct arg args[] = {
 	/* function format          argument */
-    { cpu_perc,"^b#0b5345^^c#b3b6b7^  %s%% ",NULL},
-    { ram_free,"^b#0b5345^  %s%% ",NULL},
-    { ipv4,"^b#0b5345^  %s ","wlp35s0"},
-    {wifi_perc,"^b#0b5345^  %s%% ","wlp35s0"},
-	{ datetime,"^b#0b5345^%s"," %a, %I:%M %p "},
+    /*{ run_command "icon %4s | ", "amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1"},*/
+    /*{run_command, "vol %s ", "pamixer --get-volume-human" },*/
+    {run_command, "%2s |", "weatherbar.sh" },
+    { cpu_perc,"  %s%% |",NULL},
+    { ram_free,"  %s%% |",NULL},
+    { ipv4,"  %s ","wlp35s0"},
+    /*{wifi_perc,"  %s%% |","wlp35s0"},*/
+    /*{run_command, "%2s ", "volume.sh" },*/
+    {run_command, "%2s ", "clock.sh" },
+	/*{ datetime,"%s"," %a, %I:%M %p "},*/
 
 };

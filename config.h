@@ -1,9 +1,15 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const Gap default_gap        = {.isgap = 1, .realgap = 3, .gappx = 3};
 static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayonleft  = 0;   /* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 //static const char *fonts[]          = { "monospace:size=10" };
@@ -16,8 +22,11 @@ static const char dmenufont[]       = "monospace:size=10";
 //static const char col_gray3[]       = "#bbbbbb";//#bbbbbb/escritorio no seleccionado
 //static const char col_gray4[]       = "#eeeeee";//#eeeeee/escritorio seleccionado
 //static const char col_cyan[]        = "#af601a";//#005577 color default-/en on-en activo/barra de titulos/selector escritorio.
-
-
+//__//__///__//__//__//__//__//__//__//__//__//__//__//__//__//__//__//__//
+//*****Audio
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
 //Mis Colores
 static const char Negro[]        = "#000000";
 static const char Blanco[]       = "#FFFFFF";
@@ -30,7 +39,7 @@ static const char Cyan[]         = "#47E3FF";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { Gris, Negro, Gris },
-	[SchemeSel]  = { Gris, Vino,  Menta  },
+	[SchemeSel]  = { Gris, Negro,  Menta  },
 	[SchemeStatus]  = { Gris, Negro,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
 	[SchemeTagsSel]  = { Gris, Menta,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
 	[SchemeTagsNorm]  = { Gris, Negro,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
@@ -42,12 +51,12 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 /* launcher commands (They must be NULL terminated) */
-//static const char* surf[]      = { "surf", "duckduckgo.com", NULL };
+//static const char* surf[]      = { "surf", "duckduckgo.com", NULL };
 static const char* pavucontrol[]      = {"pavucontrol", NULL };
 
 static const Launcher launchers[] = {
     /* command       name to display */
-	{ pavucontrol,         "" },
+	{ pavucontrol,         "     |" },
 };
 
 static const Rule rules[] = {
@@ -101,6 +110,9 @@ static const char *archlogout[] = { "archlinux-logout", NULL };
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefox } },
